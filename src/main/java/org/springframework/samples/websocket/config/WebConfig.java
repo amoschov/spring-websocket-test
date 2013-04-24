@@ -13,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
+import org.springframework.websocket.TextMessage;
 import org.springframework.websocket.WebSocketHandler;
 import org.springframework.websocket.server.support.WebSocketHttpRequestHandler;
 
@@ -27,7 +28,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public SimpleUrlHandlerMapping handlerMapping() {
 
-		WebSocketHandler wsHandler = new EchoWebSocketHandler(this.rootConfig.echoService());
+		WebSocketHandler<TextMessage> wsHandler = new EchoWebSocketHandler(this.rootConfig.echoService());
 
 		SockJsHttpRequestHandler sockJsHttpHandler =
 				new SockJsHttpRequestHandler("/echoSockJS", sockJsService(), wsHandler);

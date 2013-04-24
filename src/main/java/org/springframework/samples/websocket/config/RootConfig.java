@@ -26,6 +26,7 @@ import org.springframework.samples.websocket.client.SimpleGreetingService;
 import org.springframework.samples.websocket.echo.DefaultEchoService;
 import org.springframework.samples.websocket.echo.EchoService;
 import org.springframework.samples.websocket.echo.endpoint.EchoEndpoint;
+import org.springframework.websocket.TextMessage;
 import org.springframework.websocket.WebSocketHandler;
 import org.springframework.websocket.client.WebSocketConnectionManager;
 import org.springframework.websocket.client.endpoint.EndpointConnectionManager;
@@ -89,7 +90,7 @@ public class RootConfig {
 
 		String uri = "ws://localhost:8080/spring-websocket-test/echoEndpoint";
 		StandardWebSocketClient client = new StandardWebSocketClient();
-		WebSocketHandler handler = new SimpleClientWebSocketHandler(greetingService());
+		WebSocketHandler<TextMessage> handler = new SimpleClientWebSocketHandler(greetingService());
 
 		WebSocketConnectionManager connectionManager = new WebSocketConnectionManager(client, handler, uri);
 		connectionManager.setAutoStartup(true);
